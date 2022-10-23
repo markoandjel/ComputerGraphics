@@ -51,12 +51,192 @@ BOOL CProba1View::PreCreateWindow(CREATESTRUCT& cs)
 
 // CProba1View drawing
 
-void CProba1View::OnDraw(CDC* /*pDC*/)
+void CProba1View::OnDraw(CDC* pDC)
 {
 	CProba1Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+
+
+	//Prvi probni primer
+
+	#pragma region Proba
+
+	/*CRect rect;
+	GetClientRect(&rect);
+	pDC->SetMapMode(MM_ANISOTROPIC);
+	pDC->SetWindowExt(100, -100);
+	pDC->SetViewportExt(rect.right, rect.bottom);
+	pDC->SetWindowOrg(-50, 50);
+	pDC->Rectangle(-20, 20, 20, -20);*/
+
+	#pragma endregion
+
+	//Primer selektovanja objekta
+
+	/*CPen* olovka = new CPen(PS_DASH, 1, RGB(0, 0, 255));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	pDC->MoveTo(10, 10);
+	pDC->LineTo(300, 300);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();*/
+
+	//Kreiranje prosirene olovke
+
+	/*LOGBRUSH logBrush;
+	logBrush.lbStyle = BS_SOLID;
+	logBrush.lbColor = RGB(200, 36, 0);
+	CPen* pPen = new CPen(PS_GEOMETRIC | PS_DASH | PS_ENDCAP_ROUND | PS_JOIN_ROUND, 7, &logBrush);
+	CPen* oldPen = pDC->SelectObject(pPen);
+	pDC->MoveTo(10, 10);
+	pDC->LineTo(300, 300);
+	pDC->SelectObject(oldPen);
+	delete pPen;*/
+
+	#pragma region Mnogougao
+
+	/*CBrush* cetka = new CBrush(HS_HORIZONTAL, RGB(0, 0, 255));
+	pDC->SetBrushOrg(100, 100);
+	CBrush* staraCetka = pDC->SelectObject(cetka);
+
+	CPen* olovka = new CPen(PS_DASH, 3, RGB(0, 255, 0));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+
+	CPoint tacke[5];
+	tacke[0] = CPoint(100, 100);
+	tacke[1] = CPoint(100, 200);
+	tacke[2] = CPoint(500, 400);
+	tacke[3] = CPoint(350, 600);
+	tacke[4] = CPoint(240, 300);
+	pDC->Polygon(tacke, 3);
+
+	pDC->SelectObject(staraOlovka);
+	pDC->SelectObject(staraCetka);
+	olovka->DeleteObject();
+	cetka->DeleteObject();*/
+
+	#pragma endregion
+
+	#pragma region IzlomljenaLinija
+
+	/*LOGBRUSH logBrush;
+	logBrush.lbStyle = BS_SOLID;
+	logBrush.lbColor = RGB(0, 0, 240);
+
+
+	CPen* olovka = new CPen(PS_GEOMETRIC|PS_DASH|PS_ENDCAP_ROUND|PS_JOIN_ROUND,6,&logBrush);
+	CPoint tacke[5];
+	tacke[0] = CPoint(100, 100);
+	tacke[1] = CPoint(100, 200);
+	tacke[2] = CPoint(500, 400);
+	tacke[3] = CPoint(350, 600);
+	tacke[4] = CPoint(240, 300);
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	pDC->Polyline(tacke, 5);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();*/
+
+	#pragma endregion
+
+	#pragma region Pravougaonik
+	/*
+	CPen* olovka = new CPen(PS_DASH, 1, RGB(240, 0, 240));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	pDC->Rectangle(100, 100, 500, 400);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();
+	*/
+
+	#pragma endregion
+
+	#pragma region Elipsa
+	/*
+	CPen* olovka = new CPen(PS_DASH, 1, RGB(240, 0, 60));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	pDC->Ellipse(100, 100, 500, 400);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();
+	*/
+
+	#pragma endregion
+
+	#pragma region ZaobljenPravougaonik
+
+	/*
+	CPen* olovka = new CPen(PS_SOLID,5, RGB(60, 140, 180));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	pDC->RoundRect(100, 100, 340, 500, 50, 50);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();
+	*/
+	#pragma endregion
+
+	#pragma region Luk
+	
+	/*CPen* olovka = new CPen(PS_SOLID, 5, RGB(0, 0, 255));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	pDC->SetArcDirection(AD_COUNTERCLOCKWISE);	
+	pDC->Arc(20, 20, 226, 144, 202, 115, 105, 32);
+
+	pDC->SetArcDirection(AD_CLOCKWISE);
+	pDC->Arc(10, 10, 226, 150, 300, 400, 80, 20);
+
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();*/
+
+	#pragma endregion
+
+	#pragma region Pita
+	
+	/*CPen* olovka = new CPen(PS_SOLID, 3, RGB(240, 0, 255));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	CRect rect = CRect(50,50,360,480);
+	CPoint start = CPoint(280, 50);
+	CPoint end = CPoint(360, 400);
+	pDC->Pie(rect, start, end);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();*/
+
+	#pragma endregion
+
+	#pragma region Odsecak
+
+	/*CPen* olovka = new CPen(PS_SOLID, 3, RGB(240, 0, 255));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+	CRect rect = CRect(50, 50, 360, 480);
+	CPoint start = CPoint(280, 50);
+	CPoint end = CPoint(360, 400);
+	pDC->Chord(rect, start, end);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();*/
+
+	#pragma endregion
+
+	#pragma region Bezier-ova_Kriva
+
+	CPoint Pt[] = { CPoint(20, 12), CPoint(88, 246),
+		 CPoint(364, 192), CPoint(250, 48),
+		 CPoint(175, 38), CPoint(388, 192), CPoint(145, 125) };
+
+	CPen* olovka = new CPen(PS_SOLID, 3, RGB(240, 0, 255));
+	CPen* staraOlovka = pDC->SelectObject(olovka);
+
+	pDC->PolyBezier(Pt, 7);
+	pDC->SelectObject(staraOlovka);
+	olovka->DeleteObject();
+
+	#pragma endregion	
+
+	
+
+
+
+
+
+
+
+	
 
 	// TODO: add draw code for native data here
 }
