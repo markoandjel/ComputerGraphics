@@ -1,21 +1,22 @@
 
-// Lab1_PripremaView.h : interface of the CLab1PripremaView class
+// Lab1_Priprema_Pokusaj2View.h : interface of the CLab1PripremaPokusaj2View class
 //
 
 #pragma once
 
 
-class CLab1PripremaView : public CView
+class CLab1PripremaPokusaj2View : public CView
 {
-private:
-	bool toggleGrid;
 protected: // create from serialization only
-	CLab1PripremaView() noexcept;
-	DECLARE_DYNCREATE(CLab1PripremaView)
+	CLab1PripremaPokusaj2View() noexcept;
+	DECLARE_DYNCREATE(CLab1PripremaPokusaj2View)
 
-// Attributes
+		// Attributes
+protected:
+	bool toggleGrid;
 public:
-	CLab1PripremaDoc* GetDocument() const;
+	CLab1PripremaPokusaj2Doc* GetDocument() const;
+	
 
 // Operations
 public:
@@ -31,7 +32,7 @@ protected:
 
 // Implementation
 public:
-	virtual ~CLab1PripremaView();
+	virtual ~CLab1PripremaPokusaj2View();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -42,14 +43,12 @@ protected:
 // Generated message map functions
 protected:
 	DECLARE_MESSAGE_MAP()
-
 public:
-	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnKeyDownLol(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
-#ifndef _DEBUG  // debug version in Lab1_PripremaView.cpp
-inline CLab1PripremaDoc* CLab1PripremaView::GetDocument() const
-   { return reinterpret_cast<CLab1PripremaDoc*>(m_pDocument); }
+#ifndef _DEBUG  // debug version in Lab1_Priprema_Pokusaj2View.cpp
+inline CLab1PripremaPokusaj2Doc* CLab1PripremaPokusaj2View::GetDocument() const
+   { return reinterpret_cast<CLab1PripremaPokusaj2Doc*>(m_pDocument); }
 #endif
 

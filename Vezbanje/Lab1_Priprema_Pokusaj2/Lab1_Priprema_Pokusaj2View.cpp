@@ -1,87 +1,77 @@
 
-// Lab1_PripremaView.cpp : implementation of the CLab1PripremaView class
+// Lab1_Priprema_Pokusaj2View.cpp : implementation of the CLab1PripremaPokusaj2View class
 //
 
 #include "pch.h"
 #include "framework.h"
-#include <iostream>
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
-#include "Lab1_Priprema.h"
+#include "Lab1_Priprema_Pokusaj2.h"
 #endif
 
-#include "Lab1_PripremaDoc.h"
-#include "Lab1_PripremaView.h"
+#include "Lab1_Priprema_Pokusaj2Doc.h"
+#include "Lab1_Priprema_Pokusaj2View.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CLab1PripremaView
+// CLab1PripremaPokusaj2View
 
-IMPLEMENT_DYNCREATE(CLab1PripremaView, CView)
+IMPLEMENT_DYNCREATE(CLab1PripremaPokusaj2View, CView)
 
-BEGIN_MESSAGE_MAP(CLab1PripremaView, CView)
+BEGIN_MESSAGE_MAP(CLab1PripremaPokusaj2View, CView)
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
 END_MESSAGE_MAP()
 
-// CLab1PripremaView construction/destruction
+// CLab1PripremaPokusaj2View construction/destruction
 
-CLab1PripremaView::CLab1PripremaView() noexcept
+CLab1PripremaPokusaj2View::CLab1PripremaPokusaj2View() noexcept
 {
 	// TODO: add construction code here
 	toggleGrid = false;
 
 }
 
-CLab1PripremaView::~CLab1PripremaView()
+CLab1PripremaPokusaj2View::~CLab1PripremaPokusaj2View()
 {
 }
 
-BOOL CLab1PripremaView::PreCreateWindow(CREATESTRUCT& cs)
+BOOL CLab1PripremaPokusaj2View::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
 	return CView::PreCreateWindow(cs);
 }
-
-// CLab1PripremaView drawing
-
-
-
-	void DrawRegularPolygon(CDC* pDC, int cx, int cy, int r, int n, float rotAngle)
+void DrawRegularPolygon(CDC* pDC, int cx, int cy, int r, int n, float rotAngle)
 {
-	double alfa = 2* 3.14159265359 / n;
+	double alfa = 2 * 3.14159265359 / n;
 	double ugao = 0;
 	CPoint* tacke = new CPoint(n);
 
 	for (int i = 0; i < n; i++)
 	{
-		tacke[i] = CPoint(cx+r * cos(ugao+rotAngle), cy+r * sin(ugao+rotAngle));
+		tacke[i] = CPoint(cx + r * cos(ugao + rotAngle), cy + r * sin(ugao + rotAngle));
 		ugao += alfa;
 	}
 
 	pDC->Polygon(tacke, n);
-	}
+}
+// CLab1PripremaPokusaj2View drawing
 
-
-
-void CLab1PripremaView::OnDraw(CDC* pDC)
+void CLab1PripremaPokusaj2View::OnDraw(CDC* pDC)
 {
-	CLab1PripremaDoc* pDoc = GetDocument();
+	CLab1PripremaPokusaj2Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
 
-	//CRect rect;
-	//GetClientRect(&rect);
-	//SetBkColor(RGB(255, 255, 0));
 	pDC->SetMapMode(MM_ANISOTROPIC);
 	pDC->SetWindowExt(500, 500);
 	//pDC->SetWindowOrg(0, 0);
@@ -117,7 +107,7 @@ void CLab1PripremaView::OnDraw(CDC* pDC)
 	CBrush* staraCetkaNull = pDC->SelectObject(cetkaNull);
 	pDC->Rectangle(0, 0, 500, 500);
 
-	
+
 
 
 	CPen* olovka = new CPen(PS_SOLID, 5, RGB(255, 0, 0));
@@ -129,7 +119,7 @@ void CLab1PripremaView::OnDraw(CDC* pDC)
 	CBrush* cetkaZuta = new CBrush(RGB(255, 255, 0));
 	CBrush* cetkaZelena = new CBrush(RGB(50, 205, 50));
 	CBrush* cetkaNarandzasta = new CBrush(RGB(255, 153, 51));
-	CBrush* cetkaPlava = new CBrush(HS_CROSS,RGB(102, 153, 255));
+	CBrush* cetkaPlava = new CBrush(HS_CROSS, RGB(102, 153, 255));
 
 	CPoint tackeCrvenogTrougla[] = { CPoint(175,100),CPoint(250,25),CPoint(325,100) };
 	CPoint tackeParalelograma[] = { CPoint(175,100),CPoint(325,100),CPoint(400,175),CPoint(250,175) };
@@ -144,8 +134,8 @@ void CLab1PripremaView::OnDraw(CDC* pDC)
 	CBrush* staraCetkaCrvena = pDC->SelectObject(cetkaCrvena);
 
 
-	
-	pDC->Polygon(tackeCrvenogTrougla,3);
+
+	pDC->Polygon(tackeCrvenogTrougla, 3);
 	CBrush* staraPlavaCetka = pDC->SelectObject(cetkaPlava);
 	pDC->Polygon(tackeParalelograma, 4);
 	CBrush* staraLjubicastaCetka = pDC->SelectObject(cetkaLjubicasta);
@@ -183,68 +173,61 @@ void CLab1PripremaView::OnDraw(CDC* pDC)
 	olovka->DeleteObject();
 	cetkaCrvena->DeleteObject();
 
-
-	
-
 	// TODO: add draw code for native data here
 }
 
 
-// CLab1PripremaView printing
+// CLab1PripremaPokusaj2View printing
 
-BOOL CLab1PripremaView::OnPreparePrinting(CPrintInfo* pInfo)
+BOOL CLab1PripremaPokusaj2View::OnPreparePrinting(CPrintInfo* pInfo)
 {
 	// default preparation
 	return DoPreparePrinting(pInfo);
 }
 
-void CLab1PripremaView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
+void CLab1PripremaPokusaj2View::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: add extra initialization before printing
 }
 
-void CLab1PripremaView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
+void CLab1PripremaPokusaj2View::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: add cleanup after printing
 }
 
 
-// CLab1PripremaView diagnostics
+// CLab1PripremaPokusaj2View diagnostics
 
 #ifdef _DEBUG
-void CLab1PripremaView::AssertValid() const
+void CLab1PripremaPokusaj2View::AssertValid() const
 {
 	CView::AssertValid();
 }
 
-void CLab1PripremaView::Dump(CDumpContext& dc) const
+void CLab1PripremaPokusaj2View::Dump(CDumpContext& dc) const
 {
 	CView::Dump(dc);
 }
 
-CLab1PripremaDoc* CLab1PripremaView::GetDocument() const // non-debug version is inline
+CLab1PripremaPokusaj2Doc* CLab1PripremaPokusaj2View::GetDocument() const // non-debug version is inline
 {
-	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CLab1PripremaDoc)));
-	return (CLab1PripremaDoc*)m_pDocument;
+	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CLab1PripremaPokusaj2Doc)));
+	return (CLab1PripremaPokusaj2Doc*)m_pDocument;
 }
 #endif //_DEBUG
 
 
-// CLab1PripremaView message handlers
+// CLab1PripremaPokusaj2View message handlers
 
 
-
-void CLab1PripremaView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+void CLab1PripremaPokusaj2View::OnKeyDownLol(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: Add your message handler code here and/or call default
+	if (nChar == 'l')
+	{
+		toggleGrid = !toggleGrid;
+		Invalidate();
+	}
 
 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
-}
-
-
-void CLab1PripremaView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	CView::OnKeyUp(nChar, nRepCnt, nFlags);
 }
