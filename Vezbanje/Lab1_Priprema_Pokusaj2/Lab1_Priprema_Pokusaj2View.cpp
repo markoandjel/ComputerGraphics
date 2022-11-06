@@ -27,6 +27,7 @@ BEGIN_MESSAGE_MAP(CLab1PripremaPokusaj2View, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 // CLab1PripremaPokusaj2View construction/destruction
@@ -219,15 +220,14 @@ CLab1PripremaPokusaj2Doc* CLab1PripremaPokusaj2View::GetDocument() const // non-
 
 // CLab1PripremaPokusaj2View message handlers
 
-
-void CLab1PripremaPokusaj2View::OnKeyDownLol(UINT nChar, UINT nRepCnt, UINT nFlags)
+void CLab1PripremaPokusaj2View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: Add your message handler code here and/or call default
-	if (nChar == 'l')
+	int pom = (char)nChar;
+	if (nChar == (int)'l')
 	{
 		toggleGrid = !toggleGrid;
 		Invalidate();
 	}
-
 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }

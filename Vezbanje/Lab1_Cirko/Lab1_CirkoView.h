@@ -1,22 +1,21 @@
 
-// Lab1_Priprema_Pokusaj2View.h : interface of the CLab1PripremaPokusaj2View class
+// Lab1_CirkoView.h : interface of the CLab1CirkoView class
 //
 
 #pragma once
 
 
-class CLab1PripremaPokusaj2View : public CView
+class CLab1CirkoView : public CView
 {
 protected: // create from serialization only
-	CLab1PripremaPokusaj2View() noexcept;
-	DECLARE_DYNCREATE(CLab1PripremaPokusaj2View)
+	CLab1CirkoView() noexcept;
+	DECLARE_DYNCREATE(CLab1CirkoView)
 
-		// Attributes
-protected:
-	bool toggleGrid;
+// Attributes
+private:
+	bool grid;
 public:
-	CLab1PripremaPokusaj2Doc* GetDocument() const;
-	
+	CLab1CirkoDoc* GetDocument() const;
 
 // Operations
 public:
@@ -32,7 +31,7 @@ protected:
 
 // Implementation
 public:
-	virtual ~CLab1PripremaPokusaj2View();
+	virtual ~CLab1CirkoView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -47,8 +46,8 @@ public:
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
-#ifndef _DEBUG  // debug version in Lab1_Priprema_Pokusaj2View.cpp
-inline CLab1PripremaPokusaj2Doc* CLab1PripremaPokusaj2View::GetDocument() const
-   { return reinterpret_cast<CLab1PripremaPokusaj2Doc*>(m_pDocument); }
+#ifndef _DEBUG  // debug version in Lab1_CirkoView.cpp
+inline CLab1CirkoDoc* CLab1CirkoView::GetDocument() const
+   { return reinterpret_cast<CLab1CirkoDoc*>(m_pDocument); }
 #endif
 
