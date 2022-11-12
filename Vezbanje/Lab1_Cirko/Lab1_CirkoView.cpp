@@ -137,7 +137,6 @@ void CLab1CirkoView::OnDraw(CDC* pDC)
 	CPoint tackeLjubicastogTougla[] = { CPoint(175,287),CPoint(250,287),CPoint(175,362)};
 	pDC->Polygon(tackeLjubicastogTougla, 3);
 
-
 	pDC->SelectObject(plavaCetka);
 	DrawRegularPolygon(pDC, CentarUpisaneKruznice(tackeSrafiranogTougla).x,
 		CentarUpisaneKruznice(tackeSrafiranogTougla).y, 20, 6, 0);
@@ -173,11 +172,6 @@ void CLab1CirkoView::OnDraw(CDC* pDC)
 			pDC->LineTo(500, j);
 		}
 	}
-
-	
-
-
-
 
 	pDC->SelectObject(staraOlovka);
 	pDC->SelectObject(staraCetka);
@@ -242,7 +236,7 @@ CLab1CirkoDoc* CLab1CirkoView::GetDocument() const // non-debug version is inlin
 void CLab1CirkoView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: Add your message handler code here and/or call default
-	if (nChar == 'G')
+	if (nChar == 'H')
 	{
 		grid = !grid;
 		Invalidate();
