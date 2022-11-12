@@ -105,7 +105,6 @@ void CLab2ProbaView::OnDraw(CDC* pDC)
 	*/
 	#pragma endregion
 
-
 	#pragma region Metafajlovi
 	/*
 	CString WMFname = CString("metafile.wmf");
@@ -162,24 +161,65 @@ void CLab2ProbaView::OnDraw(CDC* pDC)
 	#pragma endregion 
 
 	#pragma region Transformacije
-	
+	/*
 	int prevMode = pDC->SetGraphicsMode(GM_ADVANCED);
 	DWORD dw = GetLastError();
 	XFORM Xform, XformOld;
-	Xform.eM11 = (float)0.8;
-	Xform.eM12 = (float)0.0;
-	Xform.eM21 = (float)0.0;
-	Xform.eM22 = (float)3.0;
+	double pi = 3.141592;
+	Xform.eM11 = cos(pi/7.0);
+	Xform.eM12 = sin(pi / 7.0);
+	Xform.eM21 = -sin(pi / 7.0);
+	Xform.eM22 = cos(pi/7.0);
 	Xform.eDx = (float)0.0;
 	Xform.eDy = (float)0.0;
 	BOOL b = pDC->GetWorldTransform(&XformOld);
 	b = pDC->SetWorldTransform(&Xform);
-
+	Xform.eM11 = 1.0;
+	Xform.eM12 = 0.0;
+	Xform.eM21 = 0.0;
+	Xform.eM22 = 1.0;
+	Xform.eDx = -75.0;
+	Xform.eDy = -75.0;
+	b = pDC->ModifyWorldTransform(&Xform, MWT_RIGHTMULTIPLY);
 	pDC->Rectangle(50, 50, 100, 100);
 	
 	dw = GetLastError();
 	b = pDC->SetWorldTransform(&XformOld);
 	pDC->SetGraphicsMode(prevMode);
+	*/
+	
+	#pragma endregion
+
+	#pragma region TextOutPrimer
+
+	/*CFont font;
+	font.CreateFont(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, CString("Arila"));
+	CFont* oldFont = pDC->SelectObject(&font);
+	pDC->TextOutW(50, 50, CString("Probni tekst"));
+	*/
+	#pragma endregion
+
+	#pragma region PostavljanjeTransformacije
+	CRect rcClient;
+	GetClientRect(rcClient);
+	COLORREF clrOld = pDC->SetTextColor(RGB(0,0,0));
+	int nOldMode = pDC->SetBkMode(TRANSPARENT);
+	CString szMsg = CString(" ...Help! I'm Spinning and I can't get up!");
+	CFont fntRotate;
+	for (int nDegrees = 0; nDegrees < 3600; nDegrees += 200)
+	{
+		LOGFONT m_logFont;
+		m_logFont.lfEscapement = nDegrees;
+		fntRotate.CreateFontIndirect(&m_logFont);
+		CFont* pOldFont = pDC->SelectObject(&fntRotate);
+		pDC->TextOut(rcClient.Width() / 2,
+			rcClient.Height() / 2, szMsg);
+		pDC->SelectObject(pOldFont);
+		fntRotate.DeleteObject();
+	}
+	pDC->SetTextColor(clrOld);
+	pDC->SetBkMode(nOldMode);
+
 	#pragma endregion
 }
 
