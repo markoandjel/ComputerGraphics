@@ -208,8 +208,6 @@
     <ResourceCompile Include="Lab2Priprema.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\marko\Downloads\RESURSI\cactus_part.emf" />
-    <None Include="C:\Users\marko\Downloads\RESURSI\cactus_part_light.emf" />
     <None Include="res\Lab2Priprema.rc2" />
   </ItemGroup>
   <ItemGroup>

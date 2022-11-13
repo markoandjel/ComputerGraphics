@@ -66,12 +66,6 @@
     <None Include="res\Lab2Priprema.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="C:\Users\marko\Downloads\RESURSI\cactus_part.emf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="C:\Users\marko\Downloads\RESURSI\cactus_part_light.emf">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Lab2_PripremaDoc.ico">

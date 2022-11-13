@@ -14,6 +14,8 @@ protected: // create from serialization only
 // Attributes
 public:
 	bool grid;
+	int alfa;
+	int beta;
 public:
 	CLab2PripremaDoc* GetDocument() const;
 
@@ -30,6 +32,7 @@ public:
 	virtual void Scale(CDC* pDC, float sX, float sY, bool rightMultiply);
 	virtual void Rotate(CDC* pDC, float angle, bool rightMultiply);
 	virtual void drawCanvas(CDC* pDC);
+	virtual void Napisitekst(CDC* pDC, CString text);
 	
 protected:
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
