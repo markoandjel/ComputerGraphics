@@ -142,14 +142,14 @@ void CLab2PripremaView::drawCanvas(CDC* pDC)
 void CLab2PripremaView::Napisitekst(CDC* pDC, CString text)
 {
 	CFont font, * oldFont;
-	font.CreateFontW(1.1 * 25, 15, -900, -900, 500, 0, 0, 0, 0, 0, 0, 0, 0, CString("Arial"));
+	font.CreateFontW(1.1 * 25, 15, -1800, 0, 500, 0, 0, 0, 0, 0, 0, 0, 0, CString("Arial"));
 
 	oldFont = pDC->SelectObject(&font);
 	int oldMode = pDC->SetBkMode(TRANSPARENT);
 	int oldColor = pDC->SetTextColor(RGB(0, 0, 0));
-	pDC->TextOutW((int)(10 + 25 * 19), (int)(10 + 25), text);
+	pDC->TextOutW((int)(10 + 25 * 19), (int)(10 + 25*19), text);
 	pDC->SetTextColor(RGB(255, 255, 0));
-	pDC->TextOutW((int)(10 + 25 * 19 - 2), (int)(10 + 25 - 2), text);
+	pDC->TextOutW((int)(10 + 25 * 19 - 2), (int)(10 + 25*19 - 2), text);
 
 	pDC->SetTextColor(oldColor);
 	pDC->SetBkMode(oldMode);
