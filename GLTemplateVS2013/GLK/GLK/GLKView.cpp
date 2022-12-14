@@ -30,6 +30,7 @@ BEGIN_MESSAGE_MAP(CGLKView, CView)
 	ON_WM_SIZE()
 	ON_WM_DESTROY()
 	ON_WM_ERASEBKGND()
+	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 // CGLKView construction/destruction
@@ -154,4 +155,41 @@ void CGLKView::OnInitialUpdate()
 	CDC* pDC = GetDC();
 	m_glRenderer.PrepareScene(pDC);
 	ReleaseDC(pDC);
+}
+
+
+void CGLKView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: Add your message handler code here and/or call default
+	switch (nChar)
+	{
+	case 'Q':
+		m_glRenderer.RotateBranch(15.0);
+		Invalidate();
+		break;
+	case 'E':
+		m_glRenderer.RotateBranch(-15.0);
+		Invalidate();
+		break;
+	case 'W':
+		m_glRenderer.RotateCamera(20,true);
+		Invalidate();
+		break;
+	case 'S':
+		m_glRenderer.RotateCamera(-20, true);
+		Invalidate();
+		break;
+	case 'A':
+		m_glRenderer.RotateCamera(20, false);
+		Invalidate();
+		break;
+	case 'D':
+		m_glRenderer.RotateCamera(-20, false);
+		Invalidate();
+		break;
+	default:
+		
+		break;
+	}
+	CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }
