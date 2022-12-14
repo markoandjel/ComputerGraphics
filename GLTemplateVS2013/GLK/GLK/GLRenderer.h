@@ -25,7 +25,7 @@ public:
 protected:
 	HGLRC	 m_hrc; //OpenGL Rendering Context 
 	double angle = 45.0;
-	double alpha = 0.0;
-	double beta = 0.0;
+	double alpha = -45;
+	double beta = 0;
 	double distance = 30;
 };

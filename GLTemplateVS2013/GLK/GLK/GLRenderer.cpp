@@ -110,42 +110,30 @@ void CGLRenderer::DrawCylinder(double h, double r1, double r2, int nSeg)
 	double angle = 2 * M_PI / nSeg;
 	double fullAngle = 0.0;
 
-	double* verticesBottom = new double[(nSeg + 1) * 2];
-	double* verticesTop = new double[(nSeg + 1) * 2];
-	for (int i = 0; i <= nSeg * 2; i += 2)
-	{
-		verticesBottom[i] = r1 * cos(fullAngle);
-		verticesBottom[i + 1] = r1 * sin(fullAngle);
-		verticesTop[i] = r2 * cos(fullAngle);
-		verticesTop[i + 1] = r2 * sin(fullAngle);
-		fullAngle += angle;
-	}
-	glBegin(GL_TRIANGLE_FAN); //crtanje donje osnove
+	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, 0, 0);
-	for (int i = 0; i <= nSeg * 2; i += 2)
+	for (int i = 0; i < nSeg + 1; i++)
 	{
-		glVertex3f(verticesBottom[i], 0, verticesBottom[i + 1]);
+		glVertex3f(r1 * cos(angle * i), 0, r1 * sin(angle * i));
 	}
 	glEnd();
 
-	glBegin(GL_TRIANGLE_FAN); //crtanje gornje osnove
+	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, h, 0);
-	for (int i = 0; i <= nSeg * 2; i += 2)
+	for (int i = 0; i < nSeg + 1; i++)
 	{
-		glVertex3f(verticesBottom[i], h, verticesBottom[i + 1]);
+		glVertex3f(r2 * cos(angle * i), h, r2 * sin(angle * i));
 	}
 	glEnd();
 
 	glBegin(GL_QUAD_STRIP);
-	for (int i = 0; i <= nSeg * 2; i += 2)
+	for (int i = 0; i < nSeg + 1; i++)
 	{
-		glVertex3f(verticesBottom[i], 0, verticesBottom[i + 1]);
-		glVertex3f(verticesTop[i], h, verticesBottom[i + 1]);
+		glVertex3f(r1 * cos(angle * i), 0, r1 * sin(angle * i));
+		glVertex3f(r2 * cos(angle * i), h, r2 * sin(angle * i));
 	}
 	glEnd();
 
-	delete[] verticesBottom;
-	delete[] verticesTop;
 }
 
 void CGLRenderer::DrawCone(double h, double r, int nSeg)
@@ -215,12 +203,6 @@ void CGLRenderer::DrawFigure(double angle)
 
 	glPushMatrix();
 
-	/*glTranslatef(0, 2, 0);
-	glRotatef(angle, 1, 0, 0);
-	glColor3f(1, 1, 0);
-	DrawCone(1.5, 1, 30);
-	glTranslatef(0, 1.5 + 0.7 / 2, 0);*/
-
 	glTranslatef(0, 2, 0);
 	glColor3f(0, 1, 0);
 	DrawCylinder(1.5, 0.5, 0.5, 30); //prvi cilindar
@@ -251,7 +233,7 @@ void CGLRenderer::DrawFigure(double angle)
 
 	glTranslatef(0, 0.4, 0);
 	glColor3f(0, 1, 0);
-	DrawCone(1.5, 0.4, 30); //sfera iznad 
+	DrawCone(1.5, 0.4, 30); //kupa iznad 
 
 	glTranslatef(0, 1.9, 0);
 	glColor3f(0.08, 0.8, 0.04);
@@ -271,7 +253,7 @@ void CGLRenderer::DrawFigure(double angle)
 
 	glTranslatef(0, 0.4, 0);
 	glColor3f(0, 1, 0);
-	DrawCone(1.5, 0.4, 30); //sfera iznad 
+	DrawCone(1.5, 0.4, 30); //kupa iznad 
 
 	glTranslatef(0, 1.9, 0);
 	glColor3f(0.08, 0.8, 0.04);
@@ -298,7 +280,7 @@ void CGLRenderer::DrawFigure(double angle)
 
 	glTranslatef(0, 1.9, 0);
 	glColor3f(0.08, 0.8, 0.04);
-	DrawSphere(0.7 / 2, 30, 30);
+	DrawSphere(0.7 / 2, 30, 30); //
 	glPopMatrix();
 	glPushMatrix();
 	//glPopMatrix();
@@ -334,7 +316,6 @@ void CGLRenderer::RotateBranch(double alfa)
 
 void CGLRenderer::RotateCamera(double angle, bool isAlpha)
 {
-	angle /= M_PI;
 	if (isAlpha)
 	{
 		alpha += angle;
@@ -366,13 +347,13 @@ void CGLRenderer::DrawScene(CDC* pDC)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//---------------------------------------------------------------------------------
-
+	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	float cam_x = distance * cos(alpha) * cos(beta);
-	float cam_y = distance * sin(alpha);
-	float cam_z = distance * cos(alpha) * sin(beta);
+	float cam_x = distance * cos(alpha/M_PI) * cos(beta / M_PI);
+	float cam_y = distance * sin(alpha / M_PI);
+	float cam_z = distance * cos(alpha / M_PI) * sin(beta / M_PI);
 
 	gluLookAt(cam_x, cam_y, cam_z, 0.0, 3.0, 0.0, 0.0, 1.0, 0.0);
 	DrawAxis(50);
